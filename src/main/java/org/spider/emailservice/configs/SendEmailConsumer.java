@@ -23,6 +23,7 @@ public class SendEmailConsumer {
     private ObjectMapper objectMapper;
     private EmailUtil emailUtil;
     private  SendEmailDto sendEmailDto = null;
+    private String emailPassword;
     public SendEmailConsumer(ObjectMapper objectMapper, EmailUtil emailUtil) {
         this.objectMapper = objectMapper;
         this.emailUtil = emailUtil;
@@ -51,7 +52,7 @@ public class SendEmailConsumer {
         Authenticator auth = new Authenticator() {
             //override the getPasswordAuthentication method
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(sendEmailDto.getFrom(), "kifeladzwgdugmyn");
+                return new PasswordAuthentication(sendEmailDto.getFrom(), "${EMAIL_PWD}");
             }
         };
         Session session = Session.getInstance(props, auth);
